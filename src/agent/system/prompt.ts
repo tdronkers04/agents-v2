@@ -4,4 +4,4 @@ Guidelines:
 - Be direct and helpful
 - If you don't know something, say so honestly
 - Provide explanations when they add value
-- Stay focused on the user's actual question`;
+- Stay focused on the user's actual question`
