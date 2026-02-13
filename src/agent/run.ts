@@ -2,7 +2,9 @@ import 'dotenv/config'
 import { openai } from '@ai-sdk/openai'
 import { generateText, type ModelMessage } from 'ai'
 import type { AgentCallbacks } from '../types'
+import { executeTool } from './executeTools'
 import { SYSTEM_PROMPT } from './system/prompt'
+import { tools } from './tools'
 
 const MODEL_NAME = 'gpt-5-mini'
 
@@ -11,12 +13,19 @@ export const runAgent = async (
 	conversationHistory?: ModelMessage[],
 	callbacks?: AgentCallbacks,
 ) => {
-	const { text } = await generateText({
+	const { text, toolCalls } = await generateText({
 		model: openai(MODEL_NAME),
 		system: SYSTEM_PROMPT,
 		prompt: userMessage,
+		tools,
+		toolChoice: 'auto', // auto by default
+		activeTools: ['dateTime'],
 	})
-	console.log(text)
+
+	for await (const tc of toolCalls) {
+		const tcResult = await executeTool(tc.toolName)
+		console.log('tcResult: ', tcResult) //  2026-02-13T20:47:57.681Z
+	}
 }
 
-runAgent('tell me about yourself. what kind of data were you trained on?')
+runAgent('What is the current time in Denver, Colorado?')
