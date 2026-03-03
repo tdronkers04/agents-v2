@@ -4,7 +4,7 @@ import { generateText, type ModelMessage } from 'ai'
 import type { AgentCallbacks } from '../types'
 import { executeTool } from './executeTools'
 import { SYSTEM_PROMPT } from './system/prompt'
-import { tools } from './tools'
+import { type ToolName, tools } from './tools'
 
 const MODEL_NAME = 'gpt-5-mini'
 
@@ -23,7 +23,8 @@ export const runAgent = async (
 	})
 
 	for await (const tc of toolCalls) {
-		const tcResult = await executeTool(tc.toolName)
+		const toolName = tc.toolName as ToolName
+		const tcResult = await executeTool(toolName)
 		console.log('tcResult: ', tcResult) //  2026-02-13T20:47:57.681Z
 	}
 }

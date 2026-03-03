@@ -1,12 +1,8 @@
 import type { Tool } from 'ai'
-import { tools } from './tools'
+import { type ToolName, tools } from './tools'
 
-export const executeTool = async (name: string, args?: any) => {
+export const executeTool = async (name: ToolName, args?: any) => {
 	const tool: Tool = tools[name]
-
-	if (!tool) {
-		return 'Unknown tool!'
-	}
 
 	const execute = tool.execute
 
