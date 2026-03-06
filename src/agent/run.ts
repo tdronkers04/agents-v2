@@ -2,10 +2,10 @@ import 'dotenv/config'
 import { openai } from '@ai-sdk/openai'
 import { getTracer, Laminar } from '@lmnr-ai/lmnr'
 import { generateText, type ModelMessage } from 'ai'
-import type { AgentCallbacks } from '../types'
-import { executeTool } from './executeTools'
-import { SYSTEM_PROMPT } from './system/prompt'
-import { type ToolName, tools } from './tools'
+import type { AgentCallbacks } from '../types.ts'
+import { executeTool } from './executeTools.ts'
+import { SYSTEM_PROMPT } from './system/prompt.ts'
+import { type ToolName, tools } from './tools/index.ts'
 
 const MODEL_NAME = 'gpt-5-mini'
 
@@ -37,12 +37,12 @@ export const runAgent = async (
 		console.log('tcResult: ', tcResult) //  2026-02-13T20:47:57.681Z
 	}
 
-	return text
+	return []
 }
 
-const program = async (prompt: string) => {
-	const result = await runAgent(prompt)
-	console.log('result: ', result)
-}
+// const program = async (prompt: string) => {
+// 	const result = await runAgent(prompt)
+// 	console.log('result: ', result)
+// }
 
-program('when does daylight savings take place in the USA Mountain time zone?')
+// program('when does daylight savings take place in the USA Mountain time zone?')

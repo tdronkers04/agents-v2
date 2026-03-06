@@ -1,5 +1,5 @@
 import type { Tool } from 'ai'
-import { dateTime } from './dateTime'
+import { dateTime } from './dateTime.ts'
 
 export type ToolName = 'dateTime'
 

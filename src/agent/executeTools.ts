@@ -1,5 +1,5 @@
 import type { Tool } from 'ai'
-import { type ToolName, tools } from './tools'
+import { type ToolName, tools } from './tools/index.ts'
 
 export const executeTool = async (name: ToolName, args?: any) => {
 	const tool: Tool = tools[name]
